@@ -1,0 +1,6 @@
+C:\Users\varto\RiderProjects\lab_14\lab_14\bin\Debug\lab_14.exe
+C:\Users\varto\RiderProjects\lab_14\lab_14\bin\Debug\lab_14.pdb
+C:\Users\varto\RiderProjects\lab_14\lab_14\obj\Debug\lab_14.csprojAssemblyReference.cache
+C:\Users\varto\RiderProjects\lab_14\lab_14\obj\Debug\lab_14.csproj.CoreCompileInputs.cache
+C:\Users\varto\RiderProjects\lab_14\lab_14\obj\Debug\lab_14.exe
+C:\Users\varto\RiderProjects\lab_14\lab_14\obj\Debug\lab_14.pdb
