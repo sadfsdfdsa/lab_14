@@ -48,47 +48,6 @@ namespace lab_14
         }
     }
 
-    public class Factory : Production, IPrint, ICloneable
-    {
-        public Production BaseProduction
-
-        {
-            get
-            {
-                return new Production() {WorkersNumber = WorkersNumber}; //возвращает объект базового класса
-            }
-        }
-
-        private string _factoryName;
-
-        public string FactoryName
-        {
-            get => _factoryName;
-            set => _factoryName = value;
-        }
-
-        public override void ShowInfo()
-        {
-            Console.WriteLine($"Factory name: {FactoryName}, Workers: {WorkersNumber}");
-        }
-
-        // todo work only with new key
-        public new void ShowInfoFake()
-        {
-            Console.WriteLine($"Factory name: {FactoryName}, Workers: {WorkersNumber}");
-        }
-
-        public new void Print()
-        {
-            Console.Write("IPrint, factory:");
-            ShowInfo();
-        }
-
-        public new object Clone()
-        {
-            return new Factory {FactoryName = FactoryName, WorkersNumber = WorkersNumber};
-        }
-    }
 
     public class Shop : Production, ICloneable
     {
@@ -124,58 +83,6 @@ namespace lab_14
         public override string ToString()
         {
             return _shopName;
-        }
-    }
-
-    public class Workshop : Production, ICloneable, IPrint
-    {
-        public Production BaseProduction
-
-        {
-            get
-            {
-                return new Production() {WorkersNumber = WorkersNumber}; //возвращает объект базового класса
-            }
-        }
-
-        private int _managersNumber;
-
-        public int ManagersNumber
-        {
-            get => _managersNumber;
-            set => _managersNumber = value;
-        }
-
-        public override void ShowInfo()
-        {
-            Console.WriteLine($"Managers: {ManagersNumber}, Workers: {WorkersNumber}");
-        }
-
-        public new object Clone()
-        {
-            return new Workshop {ManagersNumber = ManagersNumber, WorkersNumber = WorkersNumber};
-        }
-
-        public new void Print()
-        {
-            Console.Write("IPrint, workshop: ");
-            ShowInfo();
-        }
-    }
-
-    // sorting
-    public class SortByWorkersNumber : IComparer
-    {
-        int IComparer.Compare(object ob1, object ob2)
-        {
-            Production s1 = (Production) ob1;
-            Production s2 = (Production) ob2;
-            if (s2 != null && s1 != null && s1.WorkersNumber == s2.WorkersNumber)
-            {
-                return 0;
-            }
-
-            return s2 != null && s1 != null && s1.WorkersNumber > s2.WorkersNumber ? 1 : -1;
         }
     }
 }

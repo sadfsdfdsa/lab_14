@@ -1,0 +1,11 @@
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\bin\Debug\UnitTest_lab_14.dll
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\bin\Debug\UnitTest_lab_14.pdb
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\bin\Debug\nunit.framework.dll
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\bin\Debug\nunit.framework.xml
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\obj\Debug\UnitTest_lab_14.csprojAssemblyReference.cache
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\obj\Debug\UnitTest_lab_14.csproj.CoreCompileInputs.cache
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\obj\Debug\UnitTest_lab_14.csproj.CopyComplete
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\obj\Debug\UnitTest_lab_14.dll
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\obj\Debug\UnitTest_lab_14.pdb
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\bin\Debug\lab_14.exe
+C:\Users\varto\RiderProjects\lab_14\UnitTest_lab_14\bin\Debug\lab_14.pdb

@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 
 namespace lab_14
 {
-    internal class Program
+    public class Program
     {
         public static TestCollection col;
 
@@ -15,61 +15,61 @@ namespace lab_14
             col = new TestCollection(10);
             ShowCollection(col);
 
-            Select();
-            Count();
-            Except();
+            Select(10);
+            Count(10);
+            Except(10, 10);
             Aggregate();
-            GroupBy();
+            GroupBy(10);
 
             Console.ReadLine();
         }
 
-        public static void Select()
+        public static void Select(int workersNumberMoreThan)
         {
-            Console.WriteLine("SELECT: Выборка всех цехов с кол-во работников > 10");
+            Console.WriteLine($"SELECT: Выборка всех цехов с кол-во работников > {workersNumberMoreThan}");
 
             // LINQ
-            var linq = from shop in col.collection_1TKey where shop.WorkersNumber > 10 select shop;
+            var linq = from shop in col.collection_1TKey where shop.WorkersNumber > workersNumberMoreThan select shop;
             foreach (Shop shop in linq)
             {
                 shop.ShowInfo();
             }
 
             // расширяющие методы (WHERE)
-            var expansion = col.collection_1TKey.Where(shop => shop.WorkersNumber > 10).Select(shop => shop);
+            var expansion = col.collection_1TKey.Where(shop => shop.WorkersNumber > workersNumberMoreThan).Select(shop => shop);
 
             // проверка
             Console.WriteLine($"The same: {linq.Count() == expansion.Count()}");
             Console.WriteLine();
         }
 
-        public static void Count()
+        public static void Count(int workersNumberMoreThan)
         {
-            Console.WriteLine("COUNT: Кол-во цехов с кол-во работников > 10");
+            Console.WriteLine($"COUNT: Кол-во цехов с кол-во работников > {workersNumberMoreThan}");
 
             //linq
-            var linq = (from shop in col.collection_1TKey where shop.WorkersNumber > 10 select shop).Count<Shop>();
+            var linq = (from shop in col.collection_1TKey where shop.WorkersNumber > workersNumberMoreThan select shop).Count<Shop>();
 
             //expansion
-            var expansion = (col.collection_1TKey.Where(shop => shop.WorkersNumber > 10).Select(shop => shop))
+            var expansion = (col.collection_1TKey.Where(shop => shop.WorkersNumber > workersNumberMoreThan).Select(shop => shop))
                 .Count<Shop>();
 
             Console.WriteLine($"Кол-во: {linq}, the same: {linq == expansion}");
             Console.WriteLine();
         }
 
-        public static void Except()
+        public static void Except(int workersNumberMoreThan, int engineersNumberLessThan)
         {
-            Console.WriteLine("EXCEPT: цехи с кол-во работников > 10, но с кол-вом инженеров <= 10");
+            Console.WriteLine($"EXCEPT: цехи с кол-во работников > {workersNumberMoreThan}, но с кол-вом инженеров <= {engineersNumberLessThan}");
 
             //linq
-            var linq = (from shop in col.collection_1TKey where shop.WorkersNumber > 10 select shop)
-                .Except(from shop in col.collection_1TKey where shop.MainWorkerNumber > 10 select shop);
+            var linq = (from shop in col.collection_1TKey where shop.WorkersNumber > workersNumberMoreThan select shop)
+                .Except(from shop in col.collection_1TKey where shop.MainWorkerNumber > engineersNumberLessThan select shop);
 
             //expansion
             var expansion =
-                (col.collection_1TKey.Where(shop => shop.WorkersNumber > 10).Select(shop => shop)).Except(
-                    col.collection_1TKey.Where(shop => shop.MainWorkerNumber > 10).Select(shop => shop));
+                (col.collection_1TKey.Where(shop => shop.WorkersNumber > workersNumberMoreThan).Select(shop => shop)).Except(
+                    col.collection_1TKey.Where(shop => shop.MainWorkerNumber > engineersNumberLessThan).Select(shop => shop));
 
             foreach (Shop shop in linq)
             {
@@ -101,20 +101,20 @@ namespace lab_14
             Console.WriteLine();
         }
 
-        public static void GroupBy()
+        public static void GroupBy(int engineersNumberLessThan)
         {
-            Console.WriteLine("GROUP BY: Engineers in Shop > 10");
+            Console.WriteLine($"GROUP BY: Engineers in Shop > {engineersNumberLessThan}");
 
             //linq
             var linq = from shop in col.collection_1TKey
-                group shop by shop.MainWorkerNumber > 10;
+                group shop by shop.MainWorkerNumber > engineersNumberLessThan;
 
             //expansion
-            var expansion = col.collection_1TKey.GroupBy(shop => shop.MainWorkerNumber > 10);
+            var expansion = col.collection_1TKey.GroupBy(shop => shop.MainWorkerNumber > engineersNumberLessThan);
 
             foreach (IGrouping<bool, Shop> g in linq)
             {
-                Console.WriteLine(g.Key ? "Engineers > 10" : "Engineers <= 10");
+                Console.WriteLine(g.Key ? $"Engineers > {engineersNumberLessThan}" : $"Engineers <= {engineersNumberLessThan}");
                 foreach (var t in g)
                     t.ShowInfo();
                 Console.WriteLine();
@@ -138,22 +138,13 @@ namespace lab_14
     }
 
 
-    static class Generator
+    public static class Generator
     {
         public static Random randomizer = new Random();
 
-        public static Stack CreateCollectionFirstTask(int numberFactory, int numberWorkshop, int numberShop)
+        public static Stack CreateCollectionFirstTask(int numberShop)
         {
             Stack tmp = new Stack();
-            for (int i = 0; i < numberFactory; i++)
-            {
-                tmp.Push(GenerateObject(new Factory()));
-            }
-
-            for (int i = 0; i < numberWorkshop; i++)
-            {
-                tmp.Push(GenerateObject(new Workshop()));
-            }
 
             for (int i = 0; i < numberShop; i++)
             {
@@ -162,21 +153,6 @@ namespace lab_14
 
             return tmp;
         }
-
-        public static Factory GenerateObject(Factory tmp)
-        {
-            tmp.FactoryName = "factory_id-" + randomizer.Next(1, 125414);
-            tmp.WorkersNumber = randomizer.Next(1, 100);
-            return tmp;
-        }
-
-        public static Workshop GenerateObject(Workshop tmp)
-        {
-            tmp.ManagersNumber = randomizer.Next(1, 20);
-            tmp.WorkersNumber = randomizer.Next(1, 100);
-            return tmp;
-        }
-
         public static Shop GenerateObject(Shop tmp)
         {
             tmp.ShopName = "shop_id-" + randomizer.Next(1, 14512);
